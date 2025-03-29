@@ -6,7 +6,7 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col p-4 md:p-8 max-w-6xl mx-auto">
       <header className="mb-8 text-center animate-fade-in-up">
-        <h1 className="text-3xl md:text-4xl font-bold mb-2">AI Editor</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-2">AI Editing Assistant</h1>
         <p className="text-muted-foreground max-w-xl mx-auto">
           A simple interface to communicate with your n8n workflow through a webhook.
         </p>

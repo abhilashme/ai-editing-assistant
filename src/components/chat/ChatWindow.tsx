@@ -21,7 +21,7 @@ const ChatWindow = ({ messages, isTyping }: ChatWindowProps) => {
       {messages.length === 0 ? (
         <div className="flex h-full items-center justify-center">
           <div className="max-w-sm text-center">
-            <h3 className="text-lg font-semibold mb-2">AI Editor</h3>
+            <h3 className="text-lg font-semibold mb-2">AI Editing Assistant</h3>
             <p className="text-muted-foreground">
               Ask a question or send a message to get started.
             </p>

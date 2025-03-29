@@ -47,7 +47,7 @@ const Chatbot = () => {
   return (
     <div className="flex flex-col h-full rounded-xl border bg-card shadow-sm overflow-hidden">
       <div className="bg-primary/5 px-4 py-3 border-b">
-        <h2 className="text-lg font-medium">AI Editor</h2>
+        <h2 className="text-lg font-medium">AI Editing Assistant</h2>
       </div>
       
       <ChatWindow messages={messages} isTyping={isTyping} />
