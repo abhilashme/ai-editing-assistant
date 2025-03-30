@@ -19,7 +19,7 @@ const Index = () => {
       </div>
       
       <footer className="mt-8 text-center text-sm text-muted-foreground">
-        <p>Built with a whole lot of love</p>
+        <p>Built with a Whole Lot of Love</p>
       </footer>
     </div>
   );
