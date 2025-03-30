@@ -8,7 +8,7 @@ const Index = () => {
       <header className="mb-8 text-center animate-fade-in-up">
         <h1 className="text-3xl md:text-4xl font-bold mb-2">AI Editing Assistant</h1>
         <p className="text-muted-foreground max-w-xl mx-auto">
-          Hi! I'm Eddy. I'm an AI editing assistant for Children's Books
+          Transforming children's stories, one edit at a time—meet Eddy, your AI editing companion!
         </p>
       </header>
       
