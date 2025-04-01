@@ -4,6 +4,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
 
 interface SignupFormProps {
   onSuccess?: () => void;
@@ -15,18 +17,24 @@ const SignupForm = ({ onSuccess, onToggleForm }: SignupFormProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { signup } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+    
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    }
     
     try {
       setIsLoading(true);
       await signup(email, password, name);
-      toast.success("Account created successfully!");
       onSuccess?.();
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Failed to create account");
+      setError(error instanceof Error ? error.message : "Failed to create account");
     } finally {
       setIsLoading(false);
     }
@@ -40,6 +48,13 @@ const SignupForm = ({ onSuccess, onToggleForm }: SignupFormProps) => {
           Enter your details to create a new account
         </p>
       </div>
+      
+      {error && (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
       
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
@@ -78,7 +93,7 @@ const SignupForm = ({ onSuccess, onToggleForm }: SignupFormProps) => {
           <Input
             id="password"
             type="password"
-            placeholder="Password"
+            placeholder="Password (min 6 characters)"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required

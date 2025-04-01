@@ -4,6 +4,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
 
 interface LoginFormProps {
   onSuccess?: () => void;
@@ -14,17 +16,19 @@ const LoginForm = ({ onSuccess, onToggleForm }: LoginFormProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
     
     try {
       setIsLoading(true);
       await login(email, password);
-      toast.success("Login successful!");
       onSuccess?.();
     } catch (error) {
+      setError(error instanceof Error ? error.message : "Failed to login");
       toast.error(error instanceof Error ? error.message : "Failed to login");
     } finally {
       setIsLoading(false);
@@ -39,6 +43,13 @@ const LoginForm = ({ onSuccess, onToggleForm }: LoginFormProps) => {
           Enter your credentials to log in to your account
         </p>
       </div>
+      
+      {error && (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
       
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
